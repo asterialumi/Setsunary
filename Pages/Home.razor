@@ -16,7 +16,7 @@
             Choose a package, pick the places that feel like you, and watch your shoot itinerary take shape.
         </p>
         <a href="#packages-heading"
-           class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-brown px-7 py-3 font-medium text-white transition hover:bg-ink">
+           class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-brown px-7 py-3 font-medium text-white! transition hover:bg-ink">
             Start your itinerary <span aria-hidden="true">→</span>
         </a>
     </div>
@@ -64,15 +64,18 @@
 
     <aside class="h-fit rounded-[2rem] bg-white p-6 shadow-[0_24px_60px_-28px_rgba(138,93,59,0.45)] ring-1 ring-peach lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto">
         <ItineraryList Stops="stops" OnRemove="Toggle" />
-        <Summary Stops="stops" Package="selectedPackage" />
+        <Summary Stops="stops" Package="selectedPackage" OnComplete="Complete" />
     </aside>
 
 </div>
+
+<SuccessToast Visible="showSuccess" OnClose="CloseSuccess" />
 
 @code {
     // The page owns the state. Children only display it and report clicks.
     private readonly List<ShootSpot> stops = new();
     private PhotoPackage selectedPackage = SampleData.Packages[0];
+    private bool showSuccess;
 
     private void Toggle(ShootSpot spot)
     {
@@ -83,4 +86,18 @@
     }
 
     private void SelectPackage(PhotoPackage package) => selectedPackage = package;
+
+    // Simulated "submit": reset everything the visitor clicked, show the notice, then hide it.
+    private async Task Complete()
+    {
+        stops.Clear();
+        selectedPackage = SampleData.Packages[0];
+        showSuccess = true;
+        StateHasChanged();
+
+        await Task.Delay(3000);
+        showSuccess = false;
+    }
+
+    private void CloseSuccess() => showSuccess = false;
 }

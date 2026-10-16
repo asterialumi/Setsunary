@@ -1,0 +1,30 @@
+@if (Visible)
+{
+    <!-- Clicking the blurred backdrop or the Close button dismisses it. -->
+    <div class="fixed inset-0 z-50 grid place-items-center bg-ink/30 p-6 backdrop-blur-md" @onclick="OnClose">
+        <div role="alertdialog"
+             aria-modal="true"
+             aria-labelledby="success-title"
+             class="relative w-full max-w-sm overflow-hidden rounded-[2rem] bg-paper p-8 text-center shadow-[0_30px_80px_-30px_rgba(82,73,72,0.8)] ring-1 ring-peach motion-safe:animate-rise"
+             @onclick:stopPropagation="true">
+
+            <div class="pointer-events-none absolute -right-10 -top-10 size-36 rounded-[58%_42%_47%_53%/48%_58%_42%_52%] bg-peach/70" aria-hidden="true"></div>
+
+            <Sparkle Class="relative mx-auto size-10 text-ink motion-safe:animate-float" />
+            <p class="relative mt-4 font-quote text-lg italic tracking-wide text-brown">刹那 · complete</p>
+            <h2 id="success-title" class="relative mt-1 font-display text-4xl font-extrabold text-brown">Successful!</h2>
+            <p class="relative mt-3 font-quote text-xl italic leading-snug">Your itinerary is set. Every fleeting moment deserves to be remembered.</p>
+
+            <button type="button"
+                    @onclick="OnClose"
+                    class="relative mt-6 min-h-11 rounded-full border-2 border-brown px-6 py-2 text-sm font-medium text-brown transition hover:bg-peach">
+                Close
+            </button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool Visible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+}

@@ -8,11 +8,23 @@
         <span class="font-display font-bold text-brown">Total</span>
         <span class="font-display text-3xl font-bold text-brown">@Peso(Total)</span>
     </div>
+
+    <button type="button"
+            @onclick="OnComplete"
+            disabled="@(Stops.Count == 0)"
+            class="mt-5 min-h-11 w-full rounded-full bg-brown px-4 py-3 text-base font-medium text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:bg-peach disabled:text-ink/70 disabled:hover:bg-peach">
+        Complete itinerary
+    </button>
+    @if (Stops.Count == 0)
+    {
+        <p class="text-center text-xs text-ink/80">Add at least one spot to complete.</p>
+    }
 </div>
 
 @code {
     [Parameter, EditorRequired] public List<ShootSpot> Stops { get; set; } = new();
     [Parameter, EditorRequired] public PhotoPackage Package { get; set; } = default!;
+    [Parameter] public EventCallback OnComplete { get; set; }
 
     private int TotalMinutes => Stops.Sum(s => s.DurationMinutes);
     private decimal TimeCost => Math.Round(TotalMinutes / 60m * Package.HourlyRate);
