@@ -1,7 +1,32 @@
-﻿@page "/"
+@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Setsunary</PageTitle>
 
-<h1>Hello, world!</h1>
+<header class="mx-auto max-w-6xl px-6 pt-10">
+    <div class="rounded-3xl bg-peach/60 px-8 py-10">
+        <p class="font-quote text-base italic tracking-widest text-brown">刹那 · “moment”, “instant”</p>
+        <h1 class="mt-2 font-display text-5xl font-bold text-brown sm:text-7xl">Setsunary</h1>
+        <p class="mt-4 max-w-md font-quote text-xl italic">fleeting moments, captured one frame at a time.</p>
+    </div>
+</header>
 
-Welcome to your new app.
+<div class="mx-auto grid max-w-6xl gap-8 px-6 py-10 lg:grid-cols-[1fr_22rem]">
+
+    <main class="space-y-10">
+        <section aria-labelledby="packages-heading">
+            <h2 id="packages-heading" class="font-display text-2xl font-bold text-brown">Choose a package</h2>
+            <p class="mt-3 text-sm text-ink/70">Packages go here.</p>
+        </section>
+
+        <section aria-labelledby="spots-heading">
+            <h2 id="spots-heading" class="font-display text-2xl font-bold text-brown">Pick your spots</h2>
+            <p class="mt-3 text-sm text-ink/70">Spots go here.</p>
+        </section>
+    </main>
+
+    <aside class="h-fit rounded-3xl bg-white p-6 shadow-sm lg:sticky lg:top-6">
+        <h2 class="font-display text-2xl font-bold text-brown">Your itinerary</h2>
+        <p class="mt-3 font-quote text-lg italic text-ink/70">Nothing yet.</p>
+    </aside>
+
+</div>

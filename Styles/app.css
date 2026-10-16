@@ -1,2 +1,15 @@
 @import "tailwindcss";
 @source "../**/*.razor";
+
+@theme {
+  --color-paper: #fbf8f5;
+  --color-brown: #8a5d3b;
+  --color-peach: #e6d4c8;
+  --color-ink: #524948;
+  --color-slate: #7589a3;
+  --color-mauve: #9b9193;
+
+  --font-display: "Garet", "Outfit", sans-serif;
+  --font-quote: "Cormorant Garamond", serif;
+  --font-body: "Glacial Indifference", "Jost", sans-serif;
+}

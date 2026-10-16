@@ -1,0 +1,21 @@
+<article class="overflow-hidden rounded-3xl bg-white shadow-sm">
+    @if (Spot.ImageUrl is not null)
+    {
+        <img src="@Spot.ImageUrl" alt="@Spot.Name" class="h-40 w-full object-cover" />
+    }
+    else
+    {
+        <div class="flex h-40 items-center justify-center bg-peach font-quote text-5xl text-brown/40" aria-hidden="true">刹那</div>
+    }
+
+    <div class="p-5">
+        <p class="font-quote text-base italic text-brown">@Spot.Mood</p>
+        <h3 class="font-display text-lg font-bold">@Spot.Name</h3>
+        <p class="mt-2 text-sm">@Spot.Description</p>
+        <p class="mt-3 text-sm text-ink/70">@Spot.DurationMinutes min</p>
+    </div>
+</article>
+
+@code {
+    [Parameter, EditorRequired] public ShootSpot Spot { get; set; } = default!;
+}
