@@ -2,25 +2,58 @@
 
 <PageTitle>Setsunary</PageTitle>
 
-<header class="mx-auto max-w-6xl px-6 pt-10">
-    <div class="rounded-3xl bg-peach/60 px-8 py-10">
-        <p class="font-quote text-base italic tracking-widest text-brown">刹那 · “moment”, “instant”</p>
-        <h1 class="mt-2 font-display text-5xl font-bold text-brown sm:text-7xl">Setsunary</h1>
-        <p class="mt-4 max-w-md font-quote text-xl italic">fleeting moments, captured one frame at a time.</p>
+<header class="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-8 pt-12 lg:grid-cols-[1.05fr_1fr]">
+
+    <div class="motion-safe:animate-rise">
+        <p class="flex items-center gap-3 font-quote text-lg italic tracking-wide text-brown">
+            <Sparkle Class="size-4" /> 刹那 · “moment”, “instant”
+        </p>
+        <h1 class="mt-4 font-display text-6xl font-extrabold leading-none tracking-tight text-brown sm:text-8xl">Setsunary</h1>
+        <p class="mt-6 max-w-md font-quote text-3xl italic leading-snug">
+            fleeting <span class="text-brown">moments</span>, planned one frame at a time.
+        </p>
+        <p class="mt-4 max-w-md text-base leading-relaxed text-ink/80">
+            Choose a package, pick the places that feel like you, and watch your shoot itinerary take shape.
+        </p>
+        <a href="#packages-heading"
+           class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-brown px-7 py-3 font-medium text-white transition hover:bg-ink">
+            Start your itinerary <span aria-hidden="true">→</span>
+        </a>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-md pb-8 lg:max-w-none">
+        <span class="pointer-events-none absolute -left-14 top-4 hidden select-none font-display text-5xl font-bold outline-text-sand lg:block [writing-mode:vertical-rl] rotate-180" aria-hidden="true">capture the moment</span>
+
+        <Photo Url="@SampleData.HeroMainImage"
+               Alt="A woman gazing out of a train window in soft light"
+               Eager="true"
+               Class="aspect-[4/5] rounded-[2.5rem_2.5rem_7rem_2.5rem] shadow-[0_30px_70px_-35px_rgba(82,73,72,0.7)]" />
+
+        <Photo Url="@SampleData.HeroAccentImage"
+               Alt="A golden wheat field at sunset"
+               Eager="true"
+               Class="absolute -bottom-2 -left-2 aspect-[3/4] w-32 -rotate-3 rounded-2xl border-[6px] border-brown shadow-xl sm:w-40" />
+
+        <Sparkle Class="absolute -right-2 -top-6 size-12 text-ink motion-safe:animate-float" />
+        <Sparkle Class="absolute -right-6 bottom-16 size-6 text-brown motion-safe:animate-float" />
     </div>
 </header>
 
-<div class="mx-auto grid max-w-6xl gap-8 px-6 py-10 lg:grid-cols-[1fr_22rem]">
+<p class="mx-auto my-6 max-w-xl px-6 text-center font-quote text-2xl italic text-ink/80">
+    “Because every fleeting moment deserves to be remembered.”
+</p>
 
-    <main class="space-y-10">
+<div class="mx-auto grid max-w-6xl gap-10 px-6 py-10 lg:grid-cols-[1fr_22rem]">
+
+    <main class="space-y-14">
         <section aria-labelledby="packages-heading">
-            <h2 id="packages-heading" class="font-display text-2xl font-bold text-brown">Choose a package</h2>
+            <SectionHeading Number="01" Id="packages-heading" Title="Choose a package" Hint="How much of the story do you want kept?" />
             <PackagePicker Packages="SampleData.Packages" Selected="selectedPackage" OnSelect="SelectPackage" />
         </section>
 
         <section aria-labelledby="spots-heading">
-            <h2 id="spots-heading" class="font-display text-2xl font-bold text-brown">Pick your spots</h2>
-            <div class="mt-4 grid gap-6 sm:grid-cols-2">
+            <SectionHeading Number="02" Id="spots-heading" Title="Pick your spots" Hint="Add the places that feel like you." />
+            <div class="mt-6 grid gap-6 sm:grid-cols-2">
                 @foreach (var spot in SampleData.Spots)
                 {
                     <SpotCard Spot="spot" IsAdded="stops.Contains(spot)" OnToggle="Toggle" />
@@ -29,7 +62,7 @@
         </section>
     </main>
 
-    <aside class="h-fit rounded-3xl bg-white p-6 shadow-sm lg:sticky lg:top-6">
+    <aside class="h-fit rounded-[2rem] bg-white p-6 shadow-[0_24px_60px_-28px_rgba(138,93,59,0.45)] ring-1 ring-peach lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto">
         <ItineraryList Stops="stops" OnRemove="Toggle" />
         <Summary Stops="stops" Package="selectedPackage" />
     </aside>

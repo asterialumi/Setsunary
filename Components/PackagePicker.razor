@@ -1,19 +1,25 @@
-<div class="mt-4 grid gap-3 sm:grid-cols-3" role="radiogroup" aria-label="Package">
-    @foreach (var p in Packages)
-    {
-        var isSelected = p == Selected;
-        <button type="button"
-                role="radio"
-                aria-checked="@(isSelected ? "true" : "false")"
-                @onclick="() => OnSelect.InvokeAsync(p)"
-                class="rounded-2xl border-2 p-4 text-left transition @(isSelected ? "border-brown bg-brown text-white" : "border-peach bg-white hover:border-brown")">
-            <p class="font-display font-bold">@p.Name</p>
-            <p class="mt-1 text-sm">@p.Tagline</p>
-            <p class="mt-3 text-sm font-medium">@($"₱{p.HourlyRate:N0} / hr")</p>
-            <p class="text-xs">@(p.IncludesVideo ? "Photo + video" : "Photo only")</p>
-        </button>
-    }
-</div>
+<fieldset class="mt-6">
+    <legend class="sr-only">Package</legend>
+    <div class="grid gap-3 sm:grid-cols-3">
+        @foreach (var p in Packages)
+        {
+            var isSelected = p == Selected;
+            <label class="relative block cursor-pointer">
+                <input type="radio" name="package" class="peer sr-only" checked="@isSelected" @onchange="() => OnSelect.InvokeAsync(p)" />
+                <div class="relative h-full rounded-[1.75rem] border-2 p-5 transition peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-brown @(isSelected ? "border-brown bg-brown text-white shadow-lg" : "border-peach bg-white hover:border-sand")">
+                    @if (isSelected)
+                    {
+                        <Sparkle Class="absolute right-4 top-4 size-4 text-peach" />
+                    }
+                    <p class="font-display text-lg font-bold">@p.Name</p>
+                    <p class="mt-1 text-sm leading-relaxed">@p.Tagline</p>
+                    <p class="mt-4 text-sm font-medium">@($"₱{p.HourlyRate:N0} / hr")</p>
+                    <p class="text-xs">@(p.IncludesVideo ? "Photo + video" : "Photo only")</p>
+                </div>
+            </label>
+        }
+    </div>
+</fieldset>
 
 @code {
     [Parameter, EditorRequired] public List<PhotoPackage> Packages { get; set; } = new();

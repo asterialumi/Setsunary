@@ -1,12 +1,12 @@
-<div class="mt-6 space-y-2 border-t border-peach pt-6 text-sm">
+<div class="mt-6 space-y-2 border-t-2 border-dashed border-sand pt-6 text-sm">
     <div class="flex justify-between"><span>Package</span><span class="font-medium">@Package.Name</span></div>
     <div class="flex justify-between"><span>Spots</span><span>@Stops.Count</span></div>
     <div class="flex justify-between"><span>Shooting time</span><span>@FormatDuration(TotalMinutes)</span></div>
     <div class="flex justify-between"><span>Booking fee</span><span>@Peso(Package.BasePrice)</span></div>
     <div class="flex justify-between"><span>Time (@Peso(Package.HourlyRate) / hr)</span><span>@Peso(TimeCost)</span></div>
-    <div class="flex items-baseline justify-between border-t border-peach pt-3">
+    <div class="mt-3 flex items-baseline justify-between rounded-2xl bg-peach/60 px-4 py-3">
         <span class="font-display font-bold text-brown">Total</span>
-        <span class="font-display text-2xl font-bold text-brown">@Peso(Total)</span>
+        <span class="font-display text-3xl font-bold text-brown">@Peso(Total)</span>
     </div>
 </div>
 

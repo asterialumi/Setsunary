@@ -1,0 +1,14 @@
+<div class="flex items-end gap-4">
+    <span class="font-quote text-6xl italic leading-none text-sand" aria-hidden="true">@Number</span>
+    <div>
+        <h2 id="@Id" class="scroll-mt-8 font-display text-2xl font-bold text-brown sm:text-3xl">@Title</h2>
+        <p class="mt-1 text-sm text-ink/80">@Hint</p>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public string Number { get; set; } = "";
+    [Parameter, EditorRequired] public string Id { get; set; } = "";
+    [Parameter, EditorRequired] public string Title { get; set; } = "";
+    [Parameter] public string? Hint { get; set; }
+}

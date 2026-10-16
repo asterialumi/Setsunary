@@ -1,0 +1,16 @@
+@* A photo with a soft placeholder behind it, so a missing or slow image never leaves a hole. *@
+<div class="relative overflow-hidden bg-peach @Class">
+    <span class="absolute inset-0 grid place-items-center font-quote text-4xl text-brown/30" aria-hidden="true">刹那</span>
+    @if (Url is not null)
+    {
+        <img src="@Url" alt="@Alt" loading="@(Eager ? "eager" : "lazy")" class="absolute inset-0 size-full object-cover @ImgClass" />
+    }
+</div>
+
+@code {
+    [Parameter] public string? Url { get; set; }
+    [Parameter] public string Alt { get; set; } = "";
+    [Parameter] public bool Eager { get; set; }
+    [Parameter] public string? Class { get; set; }
+    [Parameter] public string? ImgClass { get; set; }
+}

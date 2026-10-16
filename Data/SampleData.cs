@@ -1,6 +1,17 @@
 // All the site's content is hardcoded here. No database.
+//
+// TO CHANGE A PICTURE: replace the Pexels(...) call with your own link in quotes,
+// or with a file you saved in wwwroot/images, e.g. ImageUrl = "images/train.jpg"
 public static class SampleData
 {
+    // Builds a Pexels image link from a photo's number and name. Any normal image link works too.
+    private static string Pexels(long id, string slug, int width = 900) =>
+        $"https://images.pexels.com/photos/{id}/pexels-photo-{id}/free-photo-of-{slug}.jpeg?auto=compress&cs=tinysrgb&w={width}";
+
+    // Hero pictures at the top of the page.
+    public static readonly string HeroMainImage = "images/header.png";
+    public static readonly string HeroAccentImage = "images/accent.png";
+
     public static readonly List<PhotoPackage> Packages = new()
     {
         new()
@@ -25,32 +36,38 @@ public static class SampleData
         new()
         {
             Id = 1, Name = "Train Window Portraits", Mood = "quiet commute", DurationMinutes = 60,
-            Description = "Soft window light and passing scenery, shot on a slow ride."
+            Description = "Soft window light and passing scenery, shot on a slow ride.",
+            ImageUrl = "images/train.png"
         },
         new()
         {
-            Id = 2, Name = "Sunrise at the Crossing", Mood = "first light", DurationMinutes = 45,
-            Description = "The rail crossing at dawn: long shadows and a still town."
+            Id = 2, Name = "Window Seat at Sunset", Mood = "last light", DurationMinutes = 45,
+            Description = "Warm light across the carriage as the day slows to a stop.",
+            ImageUrl = Pexels(33873942, "young-woman-relaxing-on-train-at-sunset")
         },
         new()
         {
-            Id = 3, Name = "Wheat Field Wander", Mood = "golden hour", DurationMinutes = 90,
-            Description = "Walk through tall grass while the sun drops behind the hills."
+            Id = 3, Name = "Golden Hour on the Tracks", Mood = "golden hour", DurationMinutes = 60,
+            Description = "Long shadows and empty rails, framed as the sun drops.",
+            ImageUrl = "images/golden_hour.jpg"
         },
         new()
         {
-            Id = 4, Name = "Sunflower Rows", Mood = "midday warmth", DurationMinutes = 60,
-            Description = "Bright, honest frames among the flowers, with no stiff poses."
+            Id = 4, Name = "Wheat Field Wander", Mood = "warm twilight", DurationMinutes = 90,
+            Description = "Walk through tall grass while the sun drops behind the hills.",
+            ImageUrl = Pexels(33786721, "golden-wheat-field-during-sunset")
         },
         new()
         {
-            Id = 5, Name = "Old Town Evening Walk", Mood = "blue hour", DurationMinutes = 75,
-            Description = "Lantern light and quiet streets as the day winds down."
+            Id = 5, Name = "Platform in Winter Light", Mood = "soft morning", DurationMinutes = 45,
+            Description = "A quiet station, pale light, and the wait before the train.",
+            ImageUrl = Pexels(35677515, "kyoto-train-station-platform-in-winter-light")
         },
         new()
         {
-            Id = 6, Name = "Rooftop Dusk", Mood = "last light", DurationMinutes = 45,
-            Description = "Clouds, wires, and the sky turning colour above the city."
+            Id = 6, Name = "Misty Rails", Mood = "first light", DurationMinutes = 60,
+            Description = "Fog, long lines, and stillness at the edge of town.",
+            ImageUrl = Pexels(36712525, "foggy-railway-tracks-leading-into-the-distance")
         }
     };
 }
