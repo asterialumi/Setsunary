@@ -1,0 +1,23 @@
+<div class="mt-6 space-y-2 border-t border-peach pt-6 text-sm">
+    <div class="flex justify-between"><span>Package</span><span class="font-medium">@Package.Name</span></div>
+    <div class="flex justify-between"><span>Spots</span><span>@Stops.Count</span></div>
+    <div class="flex justify-between"><span>Shooting time</span><span>@FormatDuration(TotalMinutes)</span></div>
+    <div class="flex justify-between"><span>Booking fee</span><span>@Peso(Package.BasePrice)</span></div>
+    <div class="flex justify-between"><span>Time (@Peso(Package.HourlyRate) / hr)</span><span>@Peso(TimeCost)</span></div>
+    <div class="flex items-baseline justify-between border-t border-peach pt-3">
+        <span class="font-display font-bold text-brown">Total</span>
+        <span class="font-display text-2xl font-bold text-brown">@Peso(Total)</span>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public List<ShootSpot> Stops { get; set; } = new();
+    [Parameter, EditorRequired] public PhotoPackage Package { get; set; } = default!;
+
+    private int TotalMinutes => Stops.Sum(s => s.DurationMinutes);
+    private decimal TimeCost => Math.Round(TotalMinutes / 60m * Package.HourlyRate);
+    private decimal Total => Package.BasePrice + TimeCost;
+
+    private static string Peso(decimal amount) => $"₱{amount:N0}";
+    private static string FormatDuration(int minutes) => $"{minutes / 60}h {minutes % 60:00}m";
+}

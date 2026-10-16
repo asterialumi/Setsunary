@@ -15,7 +15,7 @@
     <main class="space-y-10">
         <section aria-labelledby="packages-heading">
             <h2 id="packages-heading" class="font-display text-2xl font-bold text-brown">Choose a package</h2>
-            <p class="mt-3 text-sm text-ink/70">Packages go here.</p>
+            <PackagePicker Packages="SampleData.Packages" Selected="selectedPackage" OnSelect="SelectPackage" />
         </section>
 
         <section aria-labelledby="spots-heading">
@@ -31,13 +31,15 @@
 
     <aside class="h-fit rounded-3xl bg-white p-6 shadow-sm lg:sticky lg:top-6">
         <ItineraryList Stops="stops" OnRemove="Toggle" />
+        <Summary Stops="stops" Package="selectedPackage" />
     </aside>
 
 </div>
 
 @code {
-    // The page owns the list. Children only display it and report clicks.
+    // The page owns the state. Children only display it and report clicks.
     private readonly List<ShootSpot> stops = new();
+    private PhotoPackage selectedPackage = SampleData.Packages[0];
 
     private void Toggle(ShootSpot spot)
     {
@@ -46,4 +48,6 @@
             stops.Add(spot);
         }
     }
+
+    private void SelectPackage(PhotoPackage package) => selectedPackage = package;
 }

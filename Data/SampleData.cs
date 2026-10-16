@@ -1,6 +1,25 @@
 // All the site's content is hardcoded here. No database.
 public static class SampleData
 {
+    public static readonly List<PhotoPackage> Packages = new()
+    {
+        new()
+        {
+            Id = 1, Name = "Stills", Tagline = "Photographs only. Quiet, honest frames.",
+            IncludesVideo = false, BasePrice = 1500, HourlyRate = 2500
+        },
+        new()
+        {
+            Id = 2, Name = "Stills + Motion", Tagline = "Photographs and a short film of your day.",
+            IncludesVideo = true, BasePrice = 2500, HourlyRate = 4000
+        },
+        new()
+        {
+            Id = 3, Name = "Full Story", Tagline = "Photographs, film, and a printed keepsake.",
+            IncludesVideo = true, BasePrice = 4000, HourlyRate = 5500
+        }
+    };
+
     public static readonly List<ShootSpot> Spots = new()
     {
         new()
