@@ -1,0 +1,31 @@
+<h2 class="font-display text-2xl font-bold text-brown">Your itinerary</h2>
+
+@if (Stops.Count == 0)
+{
+    <p class="mt-3 font-quote text-lg italic text-ink/70">Nothing yet. Add a spot to begin.</p>
+}
+else
+{
+    <ol class="mt-4 space-y-3">
+        @for (var i = 0; i < Stops.Count; i++)
+        {
+            var stop = Stops[i];
+            <li class="flex items-start gap-3">
+                <span class="flex size-7 shrink-0 items-center justify-center rounded-full bg-peach text-sm font-medium text-brown">@(i + 1)</span>
+                <div class="min-w-0 flex-1">
+                    <p class="font-medium">@stop.Name</p>
+                    <p class="text-sm text-ink/70">@stop.DurationMinutes min</p>
+                </div>
+                <button type="button"
+                        @onclick="() => OnRemove.InvokeAsync(stop)"
+                        aria-label="Remove @stop.Name"
+                        class="rounded-full px-2 text-ink/70 hover:bg-peach hover:text-brown">✕</button>
+            </li>
+        }
+    </ol>
+}
+
+@code {
+    [Parameter, EditorRequired] public List<ShootSpot> Stops { get; set; } = new();
+    [Parameter] public EventCallback<ShootSpot> OnRemove { get; set; }
+}

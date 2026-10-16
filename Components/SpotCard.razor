@@ -13,9 +13,18 @@
         <h3 class="font-display text-lg font-bold">@Spot.Name</h3>
         <p class="mt-2 text-sm">@Spot.Description</p>
         <p class="mt-3 text-sm text-ink/70">@Spot.DurationMinutes min</p>
+
+        <button type="button"
+                @onclick="() => OnToggle.InvokeAsync(Spot)"
+                aria-pressed="@(IsAdded ? "true" : "false")"
+                class="mt-4 w-full rounded-full border-2 border-brown px-4 py-2 text-sm font-medium transition @(IsAdded ? "bg-brown text-white" : "text-brown hover:bg-peach")">
+            @(IsAdded ? "Remove from itinerary" : "Add to itinerary")
+        </button>
     </div>
 </article>
 
 @code {
     [Parameter, EditorRequired] public ShootSpot Spot { get; set; } = default!;
+    [Parameter] public bool IsAdded { get; set; }
+    [Parameter] public EventCallback<ShootSpot> OnToggle { get; set; }
 }

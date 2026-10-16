@@ -23,15 +23,27 @@
             <div class="mt-4 grid gap-6 sm:grid-cols-2">
                 @foreach (var spot in SampleData.Spots)
                 {
-                    <SpotCard Spot="spot" />
+                    <SpotCard Spot="spot" IsAdded="stops.Contains(spot)" OnToggle="Toggle" />
                 }
             </div>
         </section>
     </main>
 
     <aside class="h-fit rounded-3xl bg-white p-6 shadow-sm lg:sticky lg:top-6">
-        <h2 class="font-display text-2xl font-bold text-brown">Your itinerary</h2>
-        <p class="mt-3 font-quote text-lg italic text-ink/70">Nothing yet.</p>
+        <ItineraryList Stops="stops" OnRemove="Toggle" />
     </aside>
 
 </div>
+
+@code {
+    // The page owns the list. Children only display it and report clicks.
+    private readonly List<ShootSpot> stops = new();
+
+    private void Toggle(ShootSpot spot)
+    {
+        if (!stops.Remove(spot))
+        {
+            stops.Add(spot);
+        }
+    }
+}
